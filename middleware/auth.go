@@ -6,7 +6,11 @@ import (
 	"github.com/gorilla/sessions"
 )
 
-var Store = sessions.NewCookieStore([]byte("super-secret-key"))
+var Store *sessions.CookieStore
+
+func InitStore(s *sessions.CookieStore) {
+	Store = s
+}
 
 func RequireLogin(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
